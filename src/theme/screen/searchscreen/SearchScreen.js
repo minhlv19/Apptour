@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Image, Text, View, TouchableOpacity} from "react-native";
+import {Image, Text, View, TouchableOpacity, Slider, TextInput} from "react-native";
+import RangeSlider from 'rn-range-slider';
 
 class SearchScreen extends Component {
     render() {
@@ -58,7 +59,7 @@ class SearchScreen extends Component {
                         <View style={{marginLeft: 10,}}>
                             <Text style={{color: '#8e8e8e', fontSize: 16}}>Check-Out Date</Text>
                             <View style={{borderWidth: 1, borderRadius: 20}}>
-                                <Text style={{ width: 130, padding: 5,paddingLeft:10 }}>0 </Text>
+                                <TextInput style={{ width: 130,paddingLeft:10, height:40 }}>0</TextInput>
                             </View>
                         </View>
                     </View>
@@ -70,7 +71,7 @@ class SearchScreen extends Component {
                         <View style={{marginLeft: 10}}>
                             <Text style={{color: '#8e8e8e', fontSize: 16}}> </Text>
                             <View style={{borderWidth: 1, borderRadius: 20}}>
-                                <Text style={{width: 130, padding: 5, paddingLeft: 10}}>0 </Text>
+                                <TextInput style={{width: 130, paddingLeft: 10, height:40}}>0</TextInput>
                             </View>
                         </View>
                     </View>
@@ -79,9 +80,21 @@ class SearchScreen extends Component {
                     <View style={{flexDirection: 'row', flex: 1}}>
                         <View style={{width: 20, height: 1, justifyContent: 'flex-end'}}>
                         </View>
-                        <View style={{marginLeft: 10,flex:1}}>
-                            <View style={{height:1, backgroundColor:'#000'}}>
-                            </View>
+                        <View style={{flex:1, fadeDuration:'row'}}>
+                            <RangeSlider
+                                style={{width:300, height: 55, marginTop:-30}}
+                                gravity={'center'}
+                                min={0}
+                                max={100000}
+                                step={1}
+                                selectionColor="#3df"
+                                blankColor="#FF0000"
+                                onValueChanged={(low, high, fromUser) => {
+                                    this.setState({rangeLow: low, rangeHigh: high})
+                                }}/>
+                            {/*<View style={{height:1, backgroundColor:'#000'}}>*/}
+
+                            {/*</View>*/}
                         </View>
                     </View>
                 </View>

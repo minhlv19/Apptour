@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import BOTTOM1 from "../navigators/BottomNavigation";
+// import BOTTOM1 from "../navigators/BottomNavigation";
+import DrawerApp_Tour from "../navigators/DrawerNavigator";
 
 class Main extends Component {
     render() {
         return (
-            <BOTTOM1/>
+            <DrawerApp_Tour/>
         )
         ;
     }
