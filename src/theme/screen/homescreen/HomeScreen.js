@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity, FlatList, ScrollView,StyleSheet} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList, ScrollView, StyleSheet, Modal, PanResponder,Alert} from 'react-native';
 import {Logo, MenuButton} from '../../components/header';
 import RangeSlider from 'rn-range-slider';
-
+import HomeCalender from "./HomeCalender";
+import HomeMonth from "./HomeMonth";
 const items_n = [{
     id: 2,
     name: 'asdj 2',
@@ -22,22 +23,76 @@ class HomeScreen extends Component {
             headerTitle: <Logo/>,
             headerBackTitle: "Home",
             headerLayoutPreset: "center",
-
         };
     };
+
     constructor(props) {
         super(props);
         this.state = {
             data: items_n,
+            isVisible: false,
+            val: 1,
         }
         // this.setState({
         //     cards: cards.slice().filter(card => card.key !== key),
         // });
     }
+    _onPressButton() {
+        Alert.alert(
+            'Warning',
+            'Please select day',
+
+        );
+    }
+    renderElement() {
+        if (this.state.val === 1) {
+            return <HomeCalender/>;
+        } else {
+            return <HomeMonth/>;
+        }
+    }
+
+    componentWillMount() {
+        this.panResponder = PanResponder.create({
+            onStartShouldSetPanResponder: (event, gestureState) => true,
+            onPanResponderGrant: this._onPanResponderGrant.bind(this),
+        })
+    };
+
+    _onPanResponderGrant(event, gestureState) {
+        if (event.nativeEvent.locationX === event.nativeEvent.pageX) {
+            this.setState({isVisible: false});
+        }
+    }
+
     render() {
         return (
             <ScrollView>
                 <View style={{flex: 1}}>
+                    <Modal
+                        animationType={'slide'}
+                        transparent={true}
+                        visible={this.state.isVisible}
+                        onRequestClose={() => {
+                            this.setState({isVisible: false})
+                        }}>
+                        <View style={styles.view_modal} {...this.panResponder.panHandlers}>
+                            <View style={{flexDirection:'row'}}>
+                                <TouchableOpacity style={[styles.check_TouchableOpacity, {marginRight: 10}]}  onPress={() => this.setState({val: 1})}>
+                                    <Text style={{color: 'red', textAlign:'center'}}>Calender</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.check_TouchableOpacity} onPress={() => this.setState({val: 2})}>
+                                    <Text style={{color: 'red',textAlign:'center'}}>Month</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.modal}>
+                                <View style={{marginLeft: 30,marginTop:20}}>
+                                    {this.renderElement()}
+                                </View>
+
+                            </View>
+                        </View>
+                    </Modal>
                     <View style={{flex: 2}}>
                         <Image style={{width: '100%', height: 200}}
                                source={{uri: 'data:image/png;base64,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'}}/>
@@ -46,23 +101,23 @@ class HomeScreen extends Component {
                         <View style={{flexDirection: 'row',}}>
                             <View style={{flex: 1}}>
                                 <Text style={styles.text_check}>Check-in date</Text>
-                                <View style={styles.view_check}>
+                                <TouchableOpacity style={styles.view_check} onPress={() => {this.setState({isVisible: true})}} >
                                     <Text>dd/mm/yyyy</Text>
                                     <View style={{marginLeft: 20}}>
                                         <Image style={{width: 20, height: 20,}}
                                                source={require('../../../accset/images/Icon/home.png')}/>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={{flex: 1}}>
                                 <Text style={styles.text_check}>Check-out date</Text>
-                                <View style={styles.view_check}>
+                                <TouchableOpacity style={styles.view_check} onPress={() => {this.setState({isVisible: true})}}>
                                     <Text>dd/mm/yyyy</Text>
                                     <View style={{marginLeft: 20}}>
                                         <Image style={{width: 20, height: 20,}}
                                                source={require('../../../accset/images/Icon/home.png')}/>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View>
@@ -82,7 +137,7 @@ class HomeScreen extends Component {
                                         }}/>
                                     <Text style={{fontSize: 16, padding: 10}}>50</Text>
                                 </View>
-                                <TouchableOpacity style={styles.view_TouchableOpacity}>
+                                <TouchableOpacity style={styles.view_TouchableOpacity} onPress={()=>{this._onPressButton()}}>
                                     <Image style={{width: 20, height: 20,}}
                                            source={require('../../../accset/images/Icon/home.png')}/>
                                 </TouchableOpacity>
@@ -122,8 +177,19 @@ class HomeScreen extends Component {
 }
 
 export default HomeScreen;
-const styles=StyleSheet.create({
-    view_row:{
+const styles = StyleSheet.create({
+    modal: {
+        width: 400,
+        height: 380,
+        backgroundColor: '#fff',
+    },
+    view_modal: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.3)',
+    },
+    view_row: {
         margin: 10,
         borderRadius: 10,
         marginTop: -50,
@@ -132,7 +198,7 @@ const styles=StyleSheet.create({
         elevation: 7,
         backgroundColor: '#fff'
     },
-    view_check:{
+    view_check: {
         marginTop: 5,
         width: '95%',
         flexDirection: 'row',
@@ -143,17 +209,24 @@ const styles=StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'flex-end'
     },
-    text_check:{
+    text_check: {
         fontSize: 16,
         color: '#4a4a4a'
     },
-    text_Durations:{
+    check_TouchableOpacity:{
+        padding: 15,
+        width:100,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    text_Durations: {
         fontSize: 16,
         marginTop: 10,
         marginBottom: 10,
         color: '#4a4a4a'
     },
-    view_RangeSlider:{
+    view_RangeSlider: {
         flex: 6,
         backgroundColor: '#cfcfcf',
         borderWidth: 1,
@@ -163,7 +236,7 @@ const styles=StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
     },
-    view_TouchableOpacity:{
+    view_TouchableOpacity: {
         marginLeft: 10,
         backgroundColor: 'red',
         width: 50,
@@ -173,10 +246,9 @@ const styles=StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5
     },
-    text_Destinations:{
+    text_Destinations: {
         fontSize: 18,
         color: '#000',
         fontWeight: 'bold',
-
     }
 })
