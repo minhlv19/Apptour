@@ -4,7 +4,7 @@ class BoockingScreen extends Component {
     render() {
         return (
             <View>
-                <Text>fsdguk</Text>
+                <Text>Booking Screen</Text>
             </View>
         );
     }

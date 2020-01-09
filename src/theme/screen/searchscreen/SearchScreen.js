@@ -9,14 +9,20 @@ class SearchScreen extends Component {
             headerLeft: <MenuButton onPress={() => navigation.openDrawer()}/>,
             headerTitle: <Logo/>,
             headerBackTitle: "Home",
+            headerStyle: {
+                backgroundColor: 'red'
+            },
             headerLayoutPreset: "center",
         };
     };
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+
+        }
     }
+
 
     _GetonPressButton() {
         Alert.alert(
@@ -39,7 +45,7 @@ class SearchScreen extends Component {
                             }} style={{flexDirection: 'row'}}>
                                 <View style={{width: 20, height: 25, justifyContent: 'flex-end'}}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/calendar.png')}/>
+                                           source={require('../../../accset/images/Icon/calendar_red.png')}/>
                                 </View>
                                 <View style={{marginLeft: 10,}}>
                                     <Text style={{borderBottomWidth: 1, width: 130, padding: 2}}>dd/mm/yyyy </Text>
@@ -53,7 +59,7 @@ class SearchScreen extends Component {
                             }} style={{flexDirection: 'row'}}>
                                 <View style={{width: 20, height: 25, justifyContent: 'flex-end'}}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/calendar.png')}/>
+                                           source={require('../../../accset/images/Icon/ic_passage-of-time.png')}/>
                                 </View>
                                 <View style={{marginLeft: 10,}}>
                                     <Text style={{borderBottomWidth: 1, width: 130, padding: 2}}>0 night(s) </Text>
@@ -70,7 +76,7 @@ class SearchScreen extends Component {
                             }} style={{flexDirection: 'row', flex: 1}}>
                                 <View style={{width: 20, height: 25, justifyContent: 'flex-end'}}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/calendar.png')}/>
+                                           source={require('../../../accset/images/Icon/calendar_red.png')}/>
                                 </View>
                                 <View style={{marginLeft: 10,}}>
                                     <Text style={{borderBottomWidth: 1, width: 130, padding: 2}}>dd/mm/yyyy </Text>
@@ -85,7 +91,7 @@ class SearchScreen extends Component {
                             }} style={{flexDirection: 'row'}}>
                                 <View style={{width: 20, height: 25, justifyContent: 'flex-end'}}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/calendar.png')}/>
+                                           source={require('../../../accset/images/Icon/ic_slating-flag.png')}/>
                                 </View>
                                 <View style={{marginLeft: 10,}}>
                                     <Text style={{borderBottomWidth: 1, width: 130, padding: 2}}>No</Text>
@@ -98,10 +104,10 @@ class SearchScreen extends Component {
                         <View style={{flexDirection: 'row', flex: 1}}>
                             <View style={{width: 20, height: 45, justifyContent: 'flex-end'}}>
                                 <Image style={{width: 20, height: 20,}}
-                                       source={require('../../../accset/images/Icon/calendar.png')}/>
+                                       source={require('../../../accset/images/Icon/ic_min.png')}/>
                             </View>
                             <View style={{marginLeft: 10,}}>
-                                <Text style={{color: '#8e8e8e', fontSize: 16}}>Check-Out Date</Text>
+                                <Text style={{color: '#8e8e8e', fontSize: 16}}>Price</Text>
                                 <View style={{borderWidth: 1, borderRadius: 20}}>
                                     <TextInput style={{width: 130, paddingLeft: 10, height: 40}}>0</TextInput>
                                 </View>
@@ -109,8 +115,8 @@ class SearchScreen extends Component {
                         </View>
                         <View style={{flexDirection: 'row', flex: 1}}>
                             <View style={{width: 20, height: 45, justifyContent: 'flex-end'}}>
-                                <Image style={{width: 20, height: 20,}}
-                                       source={require('../../../accset/images/Icon/calendar.png')}/>
+                                <Image style={{width: 20, height: 20,justifyContent:'center'}}
+                                       source={require('../../../accset/images/Icon/ic_max.png')}/>
                             </View>
                             <View style={{marginLeft: 10}}>
                                 <Text style={{color: '#8e8e8e', fontSize: 16}}> </Text>
@@ -149,7 +155,7 @@ class SearchScreen extends Component {
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <View style={{width: 20, height: 25, justifyContent: 'flex-end'}}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/calendar.png')}/>
+                                           source={require('../../../accset/images/Icon/ic_user.png')}/>
                                 </View>
                                 <View style={{marginLeft: 10,}}>
                                     <View style={{borderBottomWidth: 1, width: 300, flexDirection: 'row'}}>
@@ -171,7 +177,7 @@ class SearchScreen extends Component {
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <View style={{width: 20, height: 25, justifyContent: 'flex-end'}}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/calendar.png')}/>
+                                           source={require('../../../accset/images/Icon/ic_gps.png')}/>
                                 </View>
                                 <View style={{marginLeft: 10,}}>
                                     <View style={{borderBottomWidth: 1, width: 300, flexDirection: 'row'}}>
