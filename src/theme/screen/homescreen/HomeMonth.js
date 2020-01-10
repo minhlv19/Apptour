@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+import MonthSelectorCalendar from 'react-native-month-selector';
 
 class HomeMonth extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            month:'',
+        }
+    }
     render() {
         return (
             <View>
-                <Text>HomeMonth</Text>
-
+                <MonthSelectorCalendar/>
             </View>
         );
     }

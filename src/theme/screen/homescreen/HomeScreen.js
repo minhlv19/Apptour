@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
-import {View, Text, Image, TouchableOpacity, FlatList, ScrollView, StyleSheet, Modal, PanResponder,Alert} from 'react-native';
+import {
+    View,
+    Text,
+    Image,
+    TouchableOpacity,
+    FlatList,
+    ScrollView,
+    StyleSheet,
+    Modal,
+    PanResponder,
+    Alert
+} from 'react-native';
 import {Logo, MenuButton} from '../../components/header';
 import RangeSlider from 'rn-range-slider';
 import HomeCalender from "./HomeCalender";
 import HomeMonth from "./HomeMonth";
+
 const items_n = [{
     id: 2,
     name: 'asdj 2',
@@ -37,13 +49,14 @@ class HomeScreen extends Component {
         //     cards: cards.slice().filter(card => card.key !== key),
         // });
     }
+
     _onPressButton() {
         Alert.alert(
             'Warning',
             'Please select day',
-
         );
     }
+
     renderElement() {
         if (this.state.val === 1) {
             return <HomeCalender/>;
@@ -77,16 +90,18 @@ class HomeScreen extends Component {
                             this.setState({isVisible: false})
                         }}>
                         <View style={styles.view_modal} {...this.panResponder.panHandlers}>
-                            <View style={{flexDirection:'row'}}>
-                                <TouchableOpacity style={[styles.check_TouchableOpacity, {marginRight: 10}]}  onPress={() => this.setState({val: 1})}>
-                                    <Text style={{color: 'red', textAlign:'center'}}>Calender</Text>
+                            <View style={{flexDirection: 'row'}}>
+                                <TouchableOpacity style={[styles.check_TouchableOpacity, {marginRight: 10}]}
+                                                  onPress={() => this.setState({val: 1})}>
+                                    <Text style={{color: 'red', textAlign: 'center'}}>Calender</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.check_TouchableOpacity} onPress={() => this.setState({val: 2})}>
-                                    <Text style={{color: 'red',textAlign:'center'}}>Month</Text>
+                                <TouchableOpacity style={styles.check_TouchableOpacity}
+                                                  onPress={() => this.setState({val: 2})}>
+                                    <Text style={{color: 'red', textAlign: 'center'}}>Month</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.modal}>
-                                <View style={{marginLeft: 30,marginTop:20}}>
+                                <View style={{marginLeft: 10, marginTop: 20, marginRight: 10}}>
                                     {this.renderElement()}
                                 </View>
 
@@ -101,7 +116,9 @@ class HomeScreen extends Component {
                         <View style={{flexDirection: 'row',}}>
                             <View style={{flex: 1}}>
                                 <Text style={styles.text_check}>Check-in date</Text>
-                                <TouchableOpacity style={styles.view_check} onPress={() => {this.setState({isVisible: true})}} >
+                                <TouchableOpacity style={styles.view_check} onPress={() => {
+                                    this.setState({isVisible: true})
+                                }}>
                                     <Text>dd/mm/yyyy</Text>
                                     <View style={{marginLeft: 20}}>
                                         <Image style={{width: 20, height: 20,}}
@@ -111,7 +128,9 @@ class HomeScreen extends Component {
                             </View>
                             <View style={{flex: 1}}>
                                 <Text style={styles.text_check}>Check-out date</Text>
-                                <TouchableOpacity style={styles.view_check} onPress={() => {this.setState({isVisible: true})}}>
+                                <TouchableOpacity style={styles.view_check} onPress={() => {
+                                    this.setState({isVisible: true})
+                                }}>
                                     <Text>dd/mm/yyyy</Text>
                                     <View style={{marginLeft: 20}}>
                                         <Image style={{width: 20, height: 20,}}
@@ -137,7 +156,9 @@ class HomeScreen extends Component {
                                         }}/>
                                     <Text style={{fontSize: 16, padding: 10}}>50</Text>
                                 </View>
-                                <TouchableOpacity style={styles.view_TouchableOpacity} onPress={()=>{this._onPressButton()}}>
+                                <TouchableOpacity style={styles.view_TouchableOpacity} onPress={() => {
+                                    this._onPressButton()
+                                }}>
                                     <Image style={{width: 20, height: 20,}}
                                            source={require('../../../accset/images/Icon/home.png')}/>
                                 </TouchableOpacity>
@@ -179,7 +200,7 @@ class HomeScreen extends Component {
 export default HomeScreen;
 const styles = StyleSheet.create({
     modal: {
-        width: 400,
+        width: 380,
         height: 380,
         backgroundColor: '#fff',
     },
@@ -213,9 +234,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#4a4a4a'
     },
-    check_TouchableOpacity:{
+    check_TouchableOpacity: {
         padding: 15,
-        width:100,
+        width: 100,
         backgroundColor: '#fff',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
