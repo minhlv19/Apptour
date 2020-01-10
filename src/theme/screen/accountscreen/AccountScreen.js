@@ -5,7 +5,7 @@ class AccountScreen extends Component {
     render() {
         return (
             <View>
-                <Text>fsdguk</Text>
+                <Text>Account Screen</Text>
             </View>
         );
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {Image} from 'react-native';
 import {createAppContainer,} from 'react-navigation';
-import {HomeScreenStack, SearchScreenStack} from "./screen-stack-navigators";
+import {HomeScreenStack, SearchScreenStack, BoockingScreenStack, AccountScreenStack} from "./screen-stack-navigators";
 
 
 const BottomTabNavigator = createBottomTabNavigator(
@@ -17,6 +17,18 @@ const BottomTabNavigator = createBottomTabNavigator(
             screen: SearchScreenStack,
             navigationOptions: {
                 tabBarLable: 'Search'
+            }
+        },
+        Booking: {
+            screen: BoockingScreenStack,
+            navigationOptions: {
+                tabBarLable: 'Booking'
+            }
+        },
+        Account:{
+            screen:AccountScreenStack,
+            navigationOptions:{
+                tabBarLable:'Account'
             }
         }
     },
@@ -40,7 +52,7 @@ const BottomTabNavigator = createBottomTabNavigator(
                                 }}
                             />
                         );
-                    }else if (routeName === 'Search'){
+                    } else if (routeName === 'Search') {
                         return (
                             <Image
                                 source={
@@ -54,6 +66,35 @@ const BottomTabNavigator = createBottomTabNavigator(
                                 }}
                             />
                         );
+                    } else if (routeName === 'Booking') {
+                        return (
+                            <Image
+                                source={
+                                    focused
+                                        ? require('../../accset/images/Icon/ic_list-red.png')
+                                        : require('../../accset/images/Icon/ic_list-black.png')
+                                }
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                }}
+                            />
+                        )
+                    }
+                    else if (routeName === 'Account'){
+                        return(
+                            <Image
+                                source={
+                                    focused
+                                        ? require('../../accset/images/Icon/account_click.png')
+                                        : require('../../accset/images/Icon/account.png')
+                                }
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                }}
+                            />
+                        )
                     }
                 }
             }

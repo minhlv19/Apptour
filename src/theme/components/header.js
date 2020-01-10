@@ -12,7 +12,7 @@ export class Logo extends React.Component {
     render() {
         return (
             <View style={{flex: 0.8, alignItems:'center'}}>
-                <Text style={{fontSize:28, color:'red', fontWeight:'bold'}}>App Tour</Text>
+                <Text style={{fontSize:20, color:'#fff', fontWeight:'bold'}}>App Tour</Text>
                 {/*<Image*/}
                 {/*    source={require('../../accset/images/Icon/home_click.png')}*/}
                 {/*    resizeMode="contain"*/}
@@ -29,11 +29,11 @@ export class Logo extends React.Component {
 export class MenuButton extends React.Component {
     render() {
         return (
-            <TouchableOpacity style={{backgroundColor:'red', marginLeft:10}} onPress={this.props.onPress}>
+            <TouchableOpacity style={{ marginLeft:10}} onPress={this.props.onPress}>
 
                 <Image
                     source={require('../../accset/images/Icon/menu.png')}
-                    style={{width: 50, height: 50}}
+                    style={{width: 26, height:26}}
                 />
             </TouchableOpacity>
         );
