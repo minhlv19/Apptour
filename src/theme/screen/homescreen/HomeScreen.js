@@ -13,8 +13,7 @@ import {
 } from 'react-native';
 import {Logo, MenuButton} from '../../components/header';
 import RangeSlider from 'rn-range-slider';
-import HomeCalender from "./HomeCalender";
-import HomeMonth from "./HomeMonth";
+import DatePicker from 'react-native-datepicker';
 
 const items_n = [{
     id: 2,
@@ -36,83 +35,50 @@ class HomeScreen extends Component {
             headerBackTitle: "Home",
             headerLayoutPreset: "center",
             headerStyle: {
-                backgroundColor: 'red'
+                backgroundColor: '#cbcbcb'
             },
-
-
         };
     };
-
     constructor(props) {
         super(props);
         this.state = {
             data: items_n,
             isVisible: false,
             val: 1,
+            date: '',
+            date_min:'',
+            date_max: '',
         }
-        // this.setState({
-        //     cards: cards.slice().filter(card => card.key !== key),
-        // });
     }
-
+    componentDidMount() {
+        const that = this;
+        const date = new Date().getDate();
+        const month = new Date().getMonth() + 1;
+        const year = new Date().getFullYear();
+        that.setState({
+            date:
+                date + '/' + month + '/' + year
+        });
+        that.setState({
+            date_min:
+                date + '/' + month + '/' + year
+        });
+        that.setState({
+            date_max:
+                (1+date) + '/' + month + '/' + year
+        });
+    }
     _onPressButton() {
         Alert.alert(
             'Warning',
             'Please select day',
         );
     }
-
-    renderElement() {
-        if (this.state.val === 1) {
-            return <HomeCalender/>;
-        } else {
-            return <HomeMonth/>;
-        }
-    }
-
-    componentWillMount() {
-        this.panResponder = PanResponder.create({
-            onStartShouldSetPanResponder: (event, gestureState) => true,
-            onPanResponderGrant: this._onPanResponderGrant.bind(this),
-        })
-    };
-
-    _onPanResponderGrant(event, gestureState) {
-        if (event.nativeEvent.locationX === event.nativeEvent.pageX) {
-            this.setState({isVisible: false});
-        }
-    }
-
     render() {
         return (
             <ScrollView>
                 <View style={{flex: 1}}>
-                    <Modal
-                        animationType={'slide'}
-                        transparent={true}
-                        visible={this.state.isVisible}
-                        onRequestClose={() => {
-                            this.setState({isVisible: false})
-                        }}>
-                        <View style={styles.view_modal} {...this.panResponder.panHandlers}>
-                            <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity style={[styles.check_TouchableOpacity, {marginRight: 10}]}
-                                                  onPress={() => this.setState({val: 1})}>
-                                    <Text style={{color: 'red', textAlign: 'center'}}>Calender</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.check_TouchableOpacity}
-                                                  onPress={() => this.setState({val: 2})}>
-                                    <Text style={{color: 'red', textAlign: 'center'}}>Month</Text>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={styles.modal}>
-                                <View style={{marginLeft: 10, marginTop: 20, marginRight: 10}}>
-                                    {this.renderElement()}
-                                </View>
-
-                            </View>
-                        </View>
-                    </Modal>
+                    {/*View*/}
                     <View style={{flex: 2}}>
                         <Image style={{width: '100%', height: 200}}
                                source={{uri: 'https://tour.dulichvietnam.com.vn/uploads/tour/du-lich-con-dao-1.JPG.jpg'}}/>
@@ -121,11 +87,26 @@ class HomeScreen extends Component {
                         <View style={{flexDirection: 'row',}}>
                             <View style={{flex: 1}}>
                                 <Text style={styles.text_check}>Check-in date</Text>
-                                <TouchableOpacity style={styles.view_check} onPress={() => {
-                                    this.setState({isVisible: true})
-                                }}>
-                                    <Text>dd/mm/yyyy</Text>
-                                    <View style={{marginLeft: 20}}>
+                                <TouchableOpacity style={styles.view_check}>
+                                    <DatePicker
+                                        style={{ width: 140 }}
+                                        date={this.state.date}
+                                        mode="date"
+                                        placeholder="select date"
+                                        format="DD-MM-YYYY"
+                                        minDate={this.state.date_min}
+                                        confirmBtnText="Confirm"
+                                        cancelBtnText="Cancel"
+                                        customStyles={{
+                                            dateInput: {
+                                                marginLeft: 50,
+                                            },
+                                        }}
+                                        onDateChange={date => {
+                                            this.setState({ date: date });
+                                        }}
+                                    />
+                                    <View>
                                         <Image style={{width: 20, height: 20,}}
                                                source={require('../../../accset/images/Icon/calendar.png')}/>
                                     </View>
@@ -136,8 +117,25 @@ class HomeScreen extends Component {
                                 <TouchableOpacity style={styles.view_check} onPress={() => {
                                     this.setState({isVisible: true})
                                 }}>
-                                    <Text>dd/mm/yyyy</Text>
-                                    <View style={{marginLeft: 20}}>
+                                    <DatePicker
+                                        style={{ width: 140 }}
+                                        date={this.state.date_max}
+                                        mode="date"
+                                        placeholder="select date"
+                                        format="DD-MM-YYYY"
+                                        minDate={this.state.date_min}
+                                        confirmBtnText="Confirm"
+                                        cancelBtnText="Cancel"
+                                        customStyles={{
+                                            dateInput: {
+                                                marginLeft: 50,
+                                            },
+                                        }}
+                                        onDateChange={date => {
+                                            this.setState({ date_max: date });
+                                        }}
+                                    />
+                                    <View>
                                         <Image style={{width: 20, height: 20,}}
                                                source={require('../../../accset/images/Icon/calendar.png')}/>
                                     </View>
@@ -188,7 +186,6 @@ class HomeScreen extends Component {
                                 flexDirection: 'row',
                                 justifyContent: 'flex-end',
                             }}>
-
                                 <View>
                                     <Image style={{width: 250, height: 300, marginRight: 10}}
                                            source={{uri: item.imagerm}}/>
@@ -201,20 +198,8 @@ class HomeScreen extends Component {
         );
     }
 }
-
 export default HomeScreen;
 const styles = StyleSheet.create({
-    modal: {
-        width: 380,
-        height: 380,
-        backgroundColor: '#fff',
-    },
-    view_modal: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.3)',
-    },
     view_row: {
         margin: 10,
         borderRadius: 10,
@@ -229,7 +214,7 @@ const styles = StyleSheet.create({
         width: '95%',
         flexDirection: 'row',
         borderWidth: 1,
-        height: 40,
+        height: 42,
         alignItems: 'center',
         padding: 10,
         borderRadius: 5,

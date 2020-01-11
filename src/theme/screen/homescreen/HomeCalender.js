@@ -24,13 +24,12 @@ class HomeCalender extends Component {
             });
         }
     }
-
     render() {
         const {selectedStartDate, selectedEndDate} = this.state;
         const minDate = new Date(2018, 1, 1); // Min date
         const maxDate = new Date(2020, 6, 3); // Max date
-        // const startDate = selectedStartDate ? selectedStartDate.toString() : ''; //Start date
-        // const endDate = selectedEndDate ? selectedEndDate.toString() : ''; //End date
+        const startDate = selectedStartDate ? selectedStartDate.toString() : ''; //Start date
+        const endDate = selectedEndDate ? selectedEndDate.toString() : ''; //End date
         return (
             <TouchableOpacity>
                 <CalendarPicker
@@ -65,6 +64,9 @@ class HomeCalender extends Component {
                     }}
                     onDateChange={this.onDateChange}
                 />
+                <View>
+                    <Text style={{padding:16}}>{startDate}{endDate}</Text>
+                </View>
             </TouchableOpacity>
         );
     }

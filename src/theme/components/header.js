@@ -12,15 +12,15 @@ export class Logo extends React.Component {
     render() {
         return (
             <View style={{flex: 0.8, alignItems:'center'}}>
-                <Text style={{fontSize:20, color:'#fff', fontWeight:'bold'}}>App Tour</Text>
-                {/*<Image*/}
-                {/*    source={require('../../accset/images/Icon/home_click.png')}*/}
-                {/*    resizeMode="contain"*/}
-                {/*    style={{*/}
-                {/*        width: 50, height: 50,*/}
-                {/*        alignSelf: 'center'*/}
-                {/*    }}*/}
-                {/*/>*/}
+                {/*<Text style={{fontSize:20, color:'#fff', fontWeight:'bold'}}>App Tour</Text>*/}
+                <Image
+                    source={require('../../accset/images/Icon/logo.png')}
+                    resizeMode="contain"
+                    style={{
+                        width: 160, height: 100,
+                        alignSelf: 'center'
+                    }}
+                />
             </View>
         )
     }
