@@ -127,7 +127,7 @@ class HomeScreen extends Component {
                                     <Text>dd/mm/yyyy</Text>
                                     <View style={{marginLeft: 20}}>
                                         <Image style={{width: 20, height: 20,}}
-                                               source={require('../../../accset/images/Icon/home.png')}/>
+                                               source={require('../../../accset/images/Icon/calendar.png')}/>
                                     </View>
                                 </TouchableOpacity>
                             </View>
@@ -139,7 +139,7 @@ class HomeScreen extends Component {
                                     <Text>dd/mm/yyyy</Text>
                                     <View style={{marginLeft: 20}}>
                                         <Image style={{width: 20, height: 20,}}
-                                               source={require('../../../accset/images/Icon/home.png')}/>
+                                               source={require('../../../accset/images/Icon/calendar.png')}/>
                                     </View>
                                 </TouchableOpacity>
                             </View>
@@ -154,6 +154,8 @@ class HomeScreen extends Component {
                                         min={0}
                                         max={50}
                                         step={1}
+                                        selectedMinimum={20}
+                                        selectedMaximum={40}
                                         selectionColor="#3df"
                                         blankColor="#FF0000"
                                         onValueChanged={(low, high, fromUser) => {
@@ -165,7 +167,7 @@ class HomeScreen extends Component {
                                     this._onPressButton()
                                 }}>
                                     <Image style={{width: 20, height: 20,}}
-                                           source={require('../../../accset/images/Icon/home.png')}/>
+                                           source={require('../../../accset/images/Icon/searc.png')}/>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -186,9 +188,7 @@ class HomeScreen extends Component {
                                 flexDirection: 'row',
                                 justifyContent: 'flex-end',
                             }}>
-                                <View>
-                                    <Text>{item.name}</Text>
-                                </View>
+
                                 <View>
                                     <Image style={{width: 250, height: 300, marginRight: 10}}
                                            source={{uri: item.imagerm}}/>
