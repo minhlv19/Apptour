@@ -3,7 +3,6 @@ import {Image, Text, View, TouchableOpacity, Slider, TextInput, PanResponder, Al
 import RangeSlider from 'rn-range-slider';
 import {Logo, MenuButton} from "../../components/header";
 import DatePicker from 'react-native-datepicker';
-
 class SearchScreen extends Component {
     static navigationOptions = ({navigation}) => {
         return {
