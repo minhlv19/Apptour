@@ -79,7 +79,7 @@ class BookTourDrawer extends Component {
                                     </View>
                                     <View style={{flexDirection:'row'}}>
                                         <Text style={{color:'#c8151b',fontWeight:'bold'}}> 4 days</Text>
-                                        <Text> (2 Days)</Text>
+                                        <Text style={{textDecorationLine:'none'}}> (2 Days)</Text>
                                     </View>
                                 </View>
                             </View>
